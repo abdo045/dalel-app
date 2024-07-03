@@ -36,7 +36,7 @@ class _SplashViewState extends State<SplashView> {
       body: Center(
         child: Text(
           AppStrings.appName,
-          style: CustomTextStyles.pacifico400style64,
+          style: CustomTextStyles.pacifico400style64Brown,
         ),
       ),
     );
@@ -45,7 +45,7 @@ class _SplashViewState extends State<SplashView> {
 
 void delayedNavigate(context, path) {
   Future.delayed(
-    const Duration(seconds: 2),
+    const Duration(seconds: 3),
     () {
       customReplacementNavigate(context, path);
     },
