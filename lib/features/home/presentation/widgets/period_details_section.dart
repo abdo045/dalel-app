@@ -23,11 +23,21 @@ class PeriodDetailsSection extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            
             SvgPicture.asset(Assets.imagesDetails1),
-            const SizedBox(width: 7),
-            CustomHeaderText(
-              text: "عن $periodName",
+           
+            Padding(
+              padding: const EdgeInsets.only(right: 10.0),
+              child: Text(
+                "عن $periodName",
+                // ignore: prefer_const_constructors
+                style: TextStyle(fontSize: 13,
+                fontWeight:FontWeight.w900, ),
+                
+              ),
             ),
+           
+
           ],
         ),
         const SizedBox(height: 47),
@@ -42,7 +52,7 @@ class PeriodDetailsSection extends StatelessWidget {
                   padding: const EdgeInsets.all(22.0),
                   child: SizedBox(
                       width: 255,
-                      height: 250,
+                      height: 300,
                       child: Text(
                         description,
                         maxLines: 20,
