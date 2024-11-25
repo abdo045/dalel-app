@@ -6,13 +6,12 @@ import 'package:dalel/features/search/presentaion/views/search_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import '../../../cart/presentation/views/bazar_view.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../logic/cubit/historical_cubit.dart';
-import 'home_view.dart';
+
+PersistentTabController _controller = PersistentTabController();
 
 class HomeNavBarWidget extends StatefulWidget {
   const HomeNavBarWidget({super.key});
@@ -22,9 +21,6 @@ class HomeNavBarWidget extends StatefulWidget {
 }
 
 class _HomeNavBarWidgetState extends State<HomeNavBarWidget> {
-  int _selectedIndex = 0;
-  final PageController _pageController = PageController();
-
   @override
   void initState() {
     super.initState();
@@ -33,31 +29,19 @@ class _HomeNavBarWidgetState extends State<HomeNavBarWidget> {
     context.read<HistoricalCubit>().getHistoricalKings();
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    _pageController.jumpToPage(index);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView(
-        controller: _pageController,
-        children: _buildScreens(),
-        onPageChanged: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: _navBarsItems(),
-        currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.primaryColor,
-        onTap: _onItemTapped,
-      ),
+    return PersistentTabView(
+      context,
+      screens: _buildScreens(),
+      items: _navBarsItems(),
+      controller: _controller,
+      navBarStyle: NavBarStyle.style12,
+      backgroundColor: AppColors.primaryColor,
+      // decoration: const NavBarDecoration(
+      //   borderRadius: BorderRadius.only(
+      //       topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+      // ),
     );
   }
 }
@@ -71,27 +55,23 @@ List<Widget> _buildScreens() {
   ];
 }
 
-List<BottomNavigationBarItem> _navBarsItems() {
+List<PersistentBottomNavBarItem> _navBarsItems() {
   return [
-    BottomNavigationBarItem(
-      icon: SvgPicture.asset(Assets.imagesHomeIcon),
-      activeIcon: SvgPicture.asset(Assets.imagesHomeIconActive),
-      label: 'Home',
+    PersistentBottomNavBarItem(
+      icon: SvgPicture.asset(Assets.imagesHomeIconActive),
+      inactiveIcon: SvgPicture.asset(Assets.imagesHomeIcon),
     ),
-    BottomNavigationBarItem(
-      icon: SvgPicture.asset(Assets.imagesShoppingCart),
-      activeIcon: SvgPicture.asset(Assets.imagesShoppingCartActive),
-      label: 'Bazar',
+    PersistentBottomNavBarItem(
+      icon: SvgPicture.asset(Assets.imagesShoppingCartActive),
+      inactiveIcon: SvgPicture.asset(Assets.imagesShoppingCart),
     ),
-    BottomNavigationBarItem(
-      icon: SvgPicture.asset(Assets.imagesSearch),
-      activeIcon: SvgPicture.asset(Assets.imagesSearchActive),
-      label: 'Search',
+    PersistentBottomNavBarItem(
+      icon: SvgPicture.asset(Assets.imagesSearchActive),
+      inactiveIcon: SvgPicture.asset(Assets.imagesSearch),
     ),
-    BottomNavigationBarItem(
-      icon: SvgPicture.asset(Assets.imagesPerson),
-      activeIcon: SvgPicture.asset(Assets.imagesPersonActive),
-      label: 'Profile',
+    PersistentBottomNavBarItem(
+      icon: SvgPicture.asset(Assets.imagesPersonActive),
+      inactiveIcon: SvgPicture.asset(Assets.imagesPerson),
     ),
   ];
 }

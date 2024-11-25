@@ -23,21 +23,11 @@ class PeriodDetailsSection extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            
             SvgPicture.asset(Assets.imagesDetails1),
-           
-            Padding(
-              padding: const EdgeInsets.only(right: 10.0),
-              child: Text(
-                "عن $periodName",
-                // ignore: prefer_const_constructors
-                style: TextStyle(fontSize: 13,
-                fontWeight:FontWeight.w900, ),
-                
-              ),
+            const SizedBox(width: 7),
+            CustomHeaderText(
+              text: "عن $periodName",
             ),
-           
-
           ],
         ),
         const SizedBox(height: 47),
@@ -48,21 +38,18 @@ class PeriodDetailsSection extends StatelessWidget {
               children: [
                 Positioned(
                     top: -24, child: SvgPicture.asset(Assets.imagesDetails2)),
-                Padding(
-                  padding: const EdgeInsets.all(22.0),
-                  child: SizedBox(
-                      width: 255,
-                      height: 300,
-                      child: Text(
-                        description,
-                        maxLines: 20,
-                        textAlign: TextAlign.right,
-                        textDirection: TextDirection.rtl,
-                        overflow: TextOverflow.ellipsis,
-                        style: CustomTextStyles.poppins500style14.copyWith(
-                            color: AppColors.black, fontFamily: 'Almarai'),
-                      )),
-                ),
+                SizedBox(
+                    width: 320,
+                    height: 220,
+                    child: Text(
+                      description,
+                      maxLines: 20,
+                      textAlign: TextAlign.right,
+                      textDirection: TextDirection.rtl,
+                      overflow: TextOverflow.ellipsis,
+                      style: CustomTextStyles.poppins500style14.copyWith(
+                          color: AppColors.black, fontFamily: 'Almarai'),
+                    )),
               ],
             ),
             const SizedBox(width: 16),
